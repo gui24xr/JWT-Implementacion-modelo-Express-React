@@ -3,6 +3,8 @@ import morgan from "morgan";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { router as authRouter } from "./routes/auth.routes.js";
+import passport from "passport";
+
 
 const PORT = process.env.PORT || 8081;
 const COOKIE_SIGN = process.env.COOKIE_SIGN || 'firmascookieserver'
@@ -21,6 +23,8 @@ app.use(
     credentials: true, // Permite que las cookies sean enviadas y recibidas
   })
 );
+
+app.use(passport.initialize());
 
 app.use('/api/auth',authRouter)
 app.listen(PORT,()=>{
